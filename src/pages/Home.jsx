@@ -16,6 +16,7 @@ export default function Home() {
     function preload() {
       this.load.image("platform", "/platform.png");
       this.load.image("player", "/player.png");
+      this.load.image("cloud", "/cloud.png")
     }
 
     function initWorld(player) {
@@ -39,6 +40,11 @@ export default function Home() {
     }
 
     function create() {
+
+     const cloud = this.add.image(worldWidth / 2, worldHeight / 2, 'cloud')
+     cloud.setDisplaySize(300,225)
+     cloud.setPosition(2500, 250)
+        
       const platforms = this.physics.add.staticGroup();
       const movingPlatforms = this.physics.add.group()
       
