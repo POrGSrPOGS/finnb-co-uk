@@ -1,9 +1,16 @@
 import { useEffect, useRef } from "react";
 import Phaser from "phaser";
-const worldWidth = 2835;
-const worldHeight = 1453;
-const startX = 100
-const startY = 425
+
+import { initWorld } from "../game/world";
+import { initPlayer, updatePlayer } from "../game/player";
+import { initCollisions } from "../game/collisions";
+import {
+  createStaticPlatform,
+  createLinearPlatform,
+  createCircularPlatform,
+  updatePlatforms,
+  onPlatformTouched,
+} from "../game/platforms";
 
 export default function Home() {
   const gameContainerRef = useRef(null);
@@ -11,82 +18,71 @@ export default function Home() {
   useEffect(() => {
     let cursors;
     let player;
-    let platform;
 
     function preload() {
       this.load.image("platform", "/platform.png");
       this.load.image("player", "/player.png");
-      this.load.image("cloud", "/cloud.png")
-    }
-
-    function initWorld(player) {
-      player.body.setCollideWorldBounds(true);
-      this.physics.world.setBounds(0, 0, worldWidth, worldHeight);
-      this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
-      this.cameras.main.startFollow(player);
-    }
-
-    function isCrushed(player) {
-        return player.body.blocked.down
-    }
-
-    function respawn(player) {
-        player.setPosition(startX, startY)
-    }
-
-    function onPlatformTouch() {
-        if (isCrushed(player)) respawn(player)
-        platform.body.setVelocityY(100);
+      this.load.image("cloud", "/cloud.png");
     }
 
     function create() {
+      const cloud = this.add.image(2500, 250, "cloud");
+      cloud.setDisplaySize(300, 225);
 
-     const cloud = this.add.image(worldWidth / 2, worldHeight / 2, 'cloud')
-     cloud.setDisplaySize(300,225)
-     cloud.setPosition(2500, 250)
-        
-      const platforms = this.physics.add.staticGroup();
-      const movingPlatforms = this.physics.add.group()
-      
-      platform = movingPlatforms.create(400, 500, "platform");
-      platform.body.setAllowGravity(false);
-      platform.setDisplaySize(400, 40);
-      platform.body.setVelocityY(100);
-      platform.body.immovable = true
-    
-
-
-      player = this.physics.add.sprite(startX, startY, "player");
-      player.setDisplaySize(40, 40);
-
+      player = initPlayer.call(this);
       initWorld.call(this, player);
+      initCollisions.call(this, player, onPlatformTouched);
 
-      this.physics.add.collider(player, platforms);
-      this.physics.add.collider(player, movingPlatforms)
-
-      cursors = this.input.keyboard.createCursorKeys();
+      createLinearPlatform({
+        axisConstant: 400,
+        width: 400,
+        height: 40,
+        axis: "Y",
+        start: 100,
+        end: 1300,
+        velocity: 300,
+      });
+      createCircularPlatform({
+        width: 128,
+        height: 32,
+        centreX: 1600,
+        centreY: 500,
+        radius: 300,
+        velocity: 100,
+        angle: 0,
+      });
+      createCircularPlatform({
+        width: 128,
+        height: 32,
+        centreX: 1600,
+        centreY: 500,
+        radius: 300,
+        velocity: 100,
+        angle: 90,
+      });
+      createCircularPlatform({
+        width: 128,
+        height: 32,
+        centreX: 1600,
+        centreY: 500,
+        radius: 300,
+        velocity: 100,
+        angle: 180,
+      });
+            createCircularPlatform({
+        width: 128,
+        height: 32,
+        centreX: 1600,
+        centreY: 500,
+        radius: 300,
+        velocity: 100,
+        angle: 270,
+      });
     }
 
-    function update() {
-      const speed = 200;
-      const jump = 600;
-
-      if (cursors.left.isDown) {
-        player.body.setVelocityX(-speed);
-      } else if (cursors.right.isDown) {
-        player.body.setVelocityX(speed);
-      } else {
-        player.body.setVelocityX(0);
-      }
-
-      if (cursors.up.isDown && player.body.blocked.down) {
-        player.body.setVelocityY(-jump);
-      }
-      if (platform.y <= 100) {
-        platform.body.setVelocityY(100);
-      } else if (platform.y >= 1300) {
-        platform.body.setVelocityY(-100);
-      }
+    function update(time, delta) {
+      updatePlayer(player, cursors);
+      updatePlatforms(time, delta);
     }
 
     const config = {
