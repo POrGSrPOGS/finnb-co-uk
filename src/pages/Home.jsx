@@ -83,6 +83,15 @@ export default function Home() {
       });
 
       createLabel({
+        text: "<- This Way",
+        x: 1900,
+        y: 1100,
+        fontSize: 50,
+        colour: "#32f142",
+        scrollFactor: 1,
+      });
+
+      createLabel({
         text: "Here is where I began, where I am now, and the projects I've made along the way",
         x: 1200,
         y: 1000,
@@ -104,7 +113,7 @@ export default function Home() {
         width: 380,
         height: 150,
         start: 1400,
-        end: 2025,
+        end: 2000,
         text: "I've always had a love for designing and creating",
         velocity: 150,
       });
