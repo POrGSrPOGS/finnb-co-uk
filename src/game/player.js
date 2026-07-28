@@ -1,8 +1,8 @@
-const speed = 500;
-const jump = 600;
+const speed = 400;
+const jump = 800;
 
-const startX = 100;
-const startY = 425;
+const startX = 2835 - 150;
+const startY = (1453/2);
 
 let cursors
 let player
