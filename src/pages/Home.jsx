@@ -14,6 +14,7 @@ import {
 import { initCollisions } from "../game/collisions";
 import {
   createStaticPlatform,
+  createKillPlatform,
   createLinearPlatform,
   createCircularPlatform,
   updatePlatforms,
@@ -64,6 +65,7 @@ export default function Home() {
       this.load.image("player", "/player.png");
       this.load.image("scratch", "/scratch.png");
       this.load.image("roblox", "/roblox.png");
+      this.load.image("killPlatform", "/killPlatform.png")
     }
 
     function create() {
@@ -167,6 +169,13 @@ export default function Home() {
         stringsDescription: "What's My Code Like?",
         strings: codeSkills,
       });
+
+      createKillPlatform({
+        x: 725,
+        y: 5*1453,
+        width: 5000,
+        height: 120,
+      });
     }
 
     function update(time, delta) {
@@ -218,7 +227,7 @@ export default function Home() {
         <ArrowKey direction="down" />
       </div>
 
-      <button className="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded active:scale-95" onClick={respawn}>
+      <button className="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded active:scale-95 opacity-50" onClick={respawn}>
         Respawn
       </button>
       

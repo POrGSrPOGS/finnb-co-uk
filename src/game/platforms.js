@@ -1,4 +1,4 @@
-import { addStaticPlatform, addMovingPlatform } from "./collisions";
+import { addStaticPlatform, addMovingPlatform, addKillPlatform } from "./collisions";
 import { getScene } from "./world";
 
 const linearPlatforms = [];
@@ -65,6 +65,16 @@ export function createStaticPlatform(config) {
   const { x, y, width, height, text } = config;
 
   const platform = addStaticPlatform(x, y);
+  platform.setDisplaySize(width, height);
+  platform.refreshBody();
+
+  attachLabel(platform, text);
+}
+
+export function createKillPlatform(config) {
+  const { x, y, width, height, text } = config;
+
+  const platform = addKillPlatform(x, y);
   platform.setDisplaySize(width, height);
   platform.refreshBody();
 
