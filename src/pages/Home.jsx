@@ -104,7 +104,7 @@ export default function Home() {
         width: 380,
         height: 150,
         start: 1400,
-        end: 2050,
+        end: 2025,
         text: "I've always had a love for designing and creating",
         velocity: 150,
       });
