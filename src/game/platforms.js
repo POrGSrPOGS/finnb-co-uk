@@ -4,10 +4,10 @@ import { getScene } from "./world";
 const linearPlatforms = [];
 const circularPlatforms = [];
 
-export function wrapByCharLimit(text, maxCharsPerLine=25) {
-  const words = text.split(' ');
+export function wrapByCharLimit(text, maxCharsPerLine = 25) {
+  const words = text.split(" ");
   const lines = [];
-  let currentLine = '';
+  let currentLine = "";
 
   for (const word of words) {
     const testLine = currentLine ? `${currentLine} ${word}` : word;
@@ -26,37 +26,39 @@ export function wrapByCharLimit(text, maxCharsPerLine=25) {
 }
 
 export function createLabel(config) {
-  let { text, x, y, fontSize, colour } = config
+  let { text, x, y, fontSize, colour, scrollFactor } = config;
 
-  text = text ?? ""
-  colour = colour ?? "#ffffff"
-  text = wrapByCharLimit(text)
+  text = text ?? "";
+  colour = colour ?? "#ffffff";
+  text = wrapByCharLimit(text);
+  scrollFactor = scrollFactor ?? 1;
 
-  const scene = getScene()
+  const scene = getScene();
   const label = scene.add.text(x, y, text, {
-  fontFamily: "Monospace",
-  fontSize: `${fontSize}px`,
-  color: colour,
-});
+    fontFamily: "Monospace",
+    fontSize: `${fontSize}px`,
+    color: colour,
+  });
 
   label.setOrigin(0.5);
+  label.setScrollFactor(scrollFactor)
 
-  return label
+  return label;
 }
 
 function attachLabel(platform, text) {
-  const { x, y, displayWidth, displayHeight } = platform
+  const { x, y, displayWidth, displayHeight } = platform;
 
-  const fontSize = (displayHeight / 5.5)
-  
+  const fontSize = displayHeight / 5.5;
+
   const label = createLabel({
     text,
     x,
     y,
     fontSize,
-  })
+  });
 
-  return label
+  return label;
 }
 
 export function createStaticPlatform(config) {
@@ -66,7 +68,7 @@ export function createStaticPlatform(config) {
   platform.setDisplaySize(width, height);
   platform.refreshBody();
 
-  attachLabel(platform, text)
+  attachLabel(platform, text);
 }
 
 export function createLinearPlatform(config) {
@@ -81,18 +83,18 @@ export function createLinearPlatform(config) {
     velocity = 100,
   } = config;
 
-  let startX
-  let startY
+  let startX;
+  let startY;
 
   if (axis.toLowerCase() == "x") {
-    startX = start
-    startY = axisConstant
+    startX = start;
+    startY = axisConstant;
   } else {
-    startX = axisConstant
-    startY = start
+    startX = axisConstant;
+    startY = start;
   }
 
-  const platform = addMovingPlatform(startX, startY)
+  const platform = addMovingPlatform(startX, startY);
 
   platform.body.setAllowGravity(false);
   platform.setDisplaySize(width, height);
@@ -100,7 +102,7 @@ export function createLinearPlatform(config) {
 
   platform.body[`setVelocity${axis.toUpperCase()}`](velocity);
 
-  const label = attachLabel(platform, text)
+  const label = attachLabel(platform, text);
 
   const linearPlatform = { platform, axis, start, end, velocity, label };
   linearPlatforms.push(linearPlatform);
@@ -115,7 +117,7 @@ export function updateLinearPlatform(linearPlatform) {
     platform.body[`setVelocity${axis.toUpperCase()}`](-velocity);
   }
 
-  label.setPosition(platform.x, platform.y)
+  label.setPosition(platform.x, platform.y);
 }
 
 export function createCircularPlatform(config) {
@@ -135,21 +137,27 @@ export function createCircularPlatform(config) {
   platform.setDisplaySize(width, height);
   platform.body.immovable = true;
 
-  const x = centreX + radius * Math.cos(angle)
-  const y = centreY + radius * Math.sin(angle)
-  platform.setPosition(
-    x,
-    y
-  );
+  const x = centreX + radius * Math.cos(angle);
+  const y = centreY + radius * Math.sin(angle);
+  platform.setPosition(x, y);
 
-  const label = attachLabel(platform, text)
+  const label = attachLabel(platform, text);
 
-  const circularPlatform = { platform, centreX, centreY, radius, velocity, angle, label };
+  const circularPlatform = {
+    platform,
+    centreX,
+    centreY,
+    radius,
+    velocity,
+    angle,
+    label,
+  };
   circularPlatforms.push(circularPlatform);
 }
 
 export function updateCircularPlatform(circularPlatform, delta) {
-  const { platform, centreX, centreY, radius, velocity, angle, label } = circularPlatform;
+  const { platform, centreX, centreY, radius, velocity, angle, label } =
+    circularPlatform;
 
   if (!platform?.active) return;
 
@@ -167,7 +175,7 @@ export function updateCircularPlatform(circularPlatform, delta) {
   const x = centreX + radius * Math.cos(newRadians);
   const y = centreY + radius * Math.sin(newRadians);
   platform.setPosition(x, y);
-  label.setPosition(x, y)
+  label.setPosition(x, y);
 }
 
 export function updatePlatforms(time, delta) {

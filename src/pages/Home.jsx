@@ -2,7 +2,14 @@ import { useEffect, useRef } from "react";
 import Phaser from "phaser";
 
 import { initWorld } from "../game/world";
-import { initPlayer, updatePlayer } from "../game/player";
+import {
+  initPlayer,
+  updatePlayer,
+  moveUp,
+  moveLeft,
+  moveRight,
+  stopPlayer,
+} from "../game/player";
 import { initCollisions } from "../game/collisions";
 import {
   createStaticPlatform,
@@ -12,6 +19,8 @@ import {
   onPlatformTouched,
   createLabel,
 } from "../game/platforms";
+
+import ArrowKey from "../components/arrowKey";
 
 function createPlatformRing(config) {
   const { x, y, width, height, stringsDescription, strings } = config;
@@ -64,17 +73,19 @@ export default function Home() {
       createLabel({
         text: "I'm Finn Brierley, an aspiring software engineer",
         x: 2200,
-        y: 1000,
+        y: 800,
         fontSize: 60,
         colour: "#02beb5",
+        scrollFactor: 0.7,
       });
 
       createLabel({
         text: "Here is where I began, where I am now, and the projects I've made along the way",
         x: 1200,
-        y: 1100,
+        y: 1000,
         fontSize: 50,
         colour: "#44bdb7",
+        scrollFactor: 0.7,
       });
 
       createStaticPlatform({
@@ -124,7 +135,7 @@ export default function Home() {
         y: 2600,
         width: 650,
         height: 120,
-        text: "And at just 13 I was coding games in Roblox without any external code",
+        text: "And at just 13 I was coding entire Roblox games from scratch",
       });
 
       const projectTypes = [
@@ -145,19 +156,14 @@ export default function Home() {
         strings: projectTypes,
       });
 
-      const codeSkills = [
-        "Modular",
-        "Flexible",
-        "Configurable",
-        "Expandable"
-      ]
+      const codeSkills = ["Modular", "Flexible", "Configurable", "Expandable"];
 
       createPlatformRing({
         x: 2835 / 2,
         y: 4500,
         width: 300,
         height: 100,
-        stringsDescription: "How I Code",
+        stringsDescription: "What's My Code Like?",
         strings: codeSkills,
       });
     }
@@ -199,6 +205,17 @@ export default function Home() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div ref={gameContainerRef} />
+      
+      <div className="absolute bottom-8 left-8 z-10">
+        <ArrowKey direction="left" />
+        <ArrowKey direction="right" />
+      </div>
+
+      <div className="absolute bottom-8 right-8 z-10 flex flex-col">
+        <ArrowKey direction="up" />
+        <ArrowKey direction="down" />
+      </div>
+      
     </div>
   );
 }
