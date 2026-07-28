@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export default function ArrowKey({ direction }) {
     const [isHeld, setHeld] = useState(false);
 
-    const opacity = isHeld ? "opacity-50" : "opacity-100"
+    const opacity = isHeld ? "opacity-25" : "opacity-50"
 
     function onDown() {
         holdKey(direction)
