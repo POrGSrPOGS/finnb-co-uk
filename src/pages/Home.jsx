@@ -76,7 +76,7 @@ export default function Home() {
         y: 800,
         fontSize: 60,
         colour: "#02beb5",
-        scrollFactor: 0.7,
+        scrollFactor: 1,
       });
 
       createLabel({
@@ -85,7 +85,7 @@ export default function Home() {
         y: 1000,
         fontSize: 50,
         colour: "#44bdb7",
-        scrollFactor: 0.7,
+        scrollFactor: 1,
       });
 
       createStaticPlatform({
@@ -176,9 +176,10 @@ export default function Home() {
     const config = {
       type: Phaser.AUTO,
       scale: {
-        mode: Phaser.Scale.RESIZE,
-        width: window.innerWidth,
-        height: window.innerHeight,
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1280,
+        height: 720,
       },
       parent: gameContainerRef.current,
       physics: {

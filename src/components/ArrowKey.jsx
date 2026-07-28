@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export default function ArrowKey({ direction }) {
     const [isHeld, setHeld] = useState(false);
 
-    const className = isHeld ? "w-18 h-18 opacity-50" : "w-18 h-18"
+    const opacity = isHeld ? "opacity-50" : "opacity-100"
 
     function onDown() {
         holdKey(direction)
@@ -31,7 +31,7 @@ export default function ArrowKey({ direction }) {
       onTouchStart={onDown}
       onTouchEnd={onUp}
     >
-      <img src={`/${direction}Arrow.png`} alt={direction} className={className} draggable={false}/>
+      <img src={`/${direction}Arrow.png`} alt={direction} className={`${opacity} w-18 h-18 select-none pointer-events-none`} draggable={false}/>
     </button>
   );
 }
