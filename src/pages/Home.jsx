@@ -218,7 +218,7 @@ export default function Home() {
         <ArrowKey direction="down" />
       </div>
 
-      <button className="absolute w-36 h-18 top-8 right-8 bg-red-500 text-white text-4xl" onClick={respawn}>
+      <button className="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded active:scale-95" onClick={respawn}>
         Respawn
       </button>
       
