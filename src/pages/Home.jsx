@@ -9,6 +9,7 @@ import {
   moveLeft,
   moveRight,
   stopPlayer,
+  respawn,
 } from "../game/player";
 import { initCollisions } from "../game/collisions";
 import {
@@ -216,6 +217,10 @@ export default function Home() {
         <ArrowKey direction="up" />
         <ArrowKey direction="down" />
       </div>
+
+      <button className="absolute w-36 h-18 top-8 right-8 bg-red-500 text-white text-4xl" onClick={respawn}>
+        Respawn
+      </button>
       
     </div>
   );
