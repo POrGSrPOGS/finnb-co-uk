@@ -20,7 +20,7 @@ import {
   createLabel,
 } from "../game/platforms";
 
-import ArrowKey from "../components/arrowKey";
+import ArrowKey from "../components/ArrowKey";
 
 function createPlatformRing(config) {
   const { x, y, width, height, stringsDescription, strings } = config;
