@@ -242,7 +242,7 @@ export default function Home() {
     WebkitTouchCallout: "none", // iOS Safari
     userSelect: "none",
   }}
-/>>
+>
         Respawn
       </button>
       
