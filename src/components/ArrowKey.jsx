@@ -31,7 +31,7 @@ export default function ArrowKey({ direction }) {
       onTouchStart={onDown}
       onTouchEnd={onUp}
     >
-      <img src={`/${direction}Arrow.png`} alt={direction} className={`${opacity} w-18 h-18 select-none pointer-events-none`} style={{
+      <img src={`/${direction}Arrow.png`} alt={direction} className={`${opacity} w-18 h-18 select-none pointer-events-none touch-none`} style={{
     WebkitUserSelect: "none",
     WebkitTouchCallout: "none",
     userSelect: "none",
