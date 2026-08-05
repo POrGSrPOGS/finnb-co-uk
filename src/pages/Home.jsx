@@ -236,15 +236,18 @@ export default function Home() {
         <ArrowKey direction="down" />
       </div>
 
-      <button className="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded active:scale-95 opacity-50 pointer-events-none select-none" onClick={respawn}
+      <button
+  className="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded active:scale-95 opacity-50 select-none touch-none"
+  onClick={respawn}
+  onContextMenu={(e) => e.preventDefault()}
   style={{
     WebkitUserSelect: "none",
     WebkitTouchCallout: "none", // iOS Safari
     userSelect: "none",
   }}
 >
-        Respawn
-      </button>
+  Respawn
+</button>
       
     </div>
   );
