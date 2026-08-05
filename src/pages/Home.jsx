@@ -236,7 +236,13 @@ export default function Home() {
         <ArrowKey direction="down" />
       </div>
 
-      <button className="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded active:scale-95 opacity-50" onClick={respawn}>
+      <button className="absolute top-8 right-8 bg-red-500 text-white px-4 py-2 rounded active:scale-95 opacity-50 pointer-events-none select-none" onClick={respawn}
+  style={{
+    WebkitUserSelect: "none",
+    WebkitTouchCallout: "none", // iOS Safari
+    userSelect: "none",
+  }}
+/>>
         Respawn
       </button>
       
