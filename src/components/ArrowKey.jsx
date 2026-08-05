@@ -31,7 +31,11 @@ export default function ArrowKey({ direction }) {
       onTouchStart={onDown}
       onTouchEnd={onUp}
     >
-      <img src={`/${direction}Arrow.png`} alt={direction} className={`${opacity} w-18 h-18 select-none pointer-events-none`} draggable={false}/>
+      <img src={`/${direction}Arrow.png`} alt={direction} className={`${opacity} w-18 h-18 select-none pointer-events-none`} style={{
+    WebkitUserSelect: "none",
+    WebkitTouchCallout: "none",
+    userSelect: "none",
+  }} draggable={false}/>
     </button>
   );
 }
