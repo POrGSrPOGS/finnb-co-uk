@@ -1,5 +1,5 @@
-const worldWidth = 2835;
-const worldHeight = 5*1453;
+const worldWidth = 4000;
+const worldHeight = 12000;
 
 let scene
 

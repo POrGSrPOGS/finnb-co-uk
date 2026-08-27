@@ -1,15 +1,16 @@
-import Confirmation from "../components/Confirmation";
 import { respawn } from "./player";
 
 let debounce = false
 
-export function teleport(params) {
+export function teleport(url) {
     if (debounce) return
+    if (!url) return
+
     debounce = true
 
-    console.log(params)
-    window.open("https://porgsrpogs.hackclub.app", "_blank");
-    respawn()
+    window.open(url, "_blank");
+    //respawn()
+
 
     debounce = false
 }

@@ -25,10 +25,43 @@ export function wrapByCharLimit(text, maxCharsPerLine = 25) {
   return lines;
 }
 
-export function createPortal({x, y, colour}) {
+export function createPortal({x, y, colour, options}) {
   const portal = addPortal(x, y, colour)
   portal.setDisplaySize(225, 275)
+  portal.setData("options", options)
+  console.log(portal.getData("options"))
+
   portal.refreshBody();
+}
+
+export function createPlatformRing(config) {
+
+  const { x, y, width, height, stringsDescription, strings } = config;
+
+  const angleInterval = 360 / strings.length;
+
+  createStaticPlatform({
+    x,
+    y,
+
+    // Make centre platform slightly smaller
+    width: width * 0.8,
+    height: height * 0.8,
+    text: stringsDescription,
+  });
+
+  strings.forEach((string, index) => {
+    createCircularPlatform({
+      width,
+      height,
+      centreX: x,
+      centreY: y,
+      radius: 500,
+      velocity: 75,
+      angle: angleInterval * index,
+      text: string,
+    });
+  });
 }
 
 export function createLabel(config) {
