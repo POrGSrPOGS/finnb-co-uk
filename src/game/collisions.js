@@ -1,17 +1,21 @@
 import { respawn } from "./player";
+import { onPlatformTouched } from "./platforms"
 
 let staticPlatforms
 let movingPlatforms
 let killPlatforms
+let portals
 
-export function initCollisions(player, onPlatformTouched) {
+export function initCollisions(player, onPortalTouched) {
     staticPlatforms = this.physics.add.staticGroup();
     movingPlatforms = this.physics.add.group()
     killPlatforms = this.physics.add.staticGroup()
+    portals = this.physics.add.staticGroup()
 
     this.physics.add.collider(player, staticPlatforms);
     this.physics.add.collider(player, movingPlatforms, onPlatformTouched)
     this.physics.add.collider(player, killPlatforms, respawn)
+    this.physics.add.collider(player, portals, onPortalTouched)
 }
 
 export function addStaticPlatform(x, y) {
@@ -24,4 +28,8 @@ export function addMovingPlatform(x, y) {
 
 export function addKillPlatform(x, y) {
     return killPlatforms.create(x, y, "killPlatform")
+}
+
+export function addPortal(x, y, colour) {
+    return portals.create(x, y, colour+"Portal")
 }

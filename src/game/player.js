@@ -22,10 +22,10 @@ export function respawn() {
   player.setPosition(startX, startY);
 }
 
-export function moveUp() {
-  if (player.body.blocked.down) {
-    player.body.setVelocityY(-jump);
-  }
+export function moveUp(multiplier = 1) {
+  //if (player.body.blocked.down) {
+    player.body.setVelocityY(-jump * multiplier);
+  //}
 }
 
 export function moveLeft() {
@@ -63,7 +63,7 @@ export function updatePlayer() {
     stopPlayer()
   }
 
-  if (cursors.up.isDown || isHeld("up")) {
+  if ((cursors.up.isDown || isHeld("up")) && player.body.blocked.down) {
     moveUp()
   }
 }
