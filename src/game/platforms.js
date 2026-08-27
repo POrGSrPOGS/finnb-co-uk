@@ -1,4 +1,4 @@
-import { addStaticPlatform, addMovingPlatform, addKillPlatform } from "./collisions";
+import { addStaticPlatform, addMovingPlatform, addKillPlatform, addPortal } from "./collisions";
 import { getScene } from "./world";
 
 const linearPlatforms = [];
@@ -23,6 +23,12 @@ export function wrapByCharLimit(text, maxCharsPerLine = 25) {
   if (currentLine) lines.push(currentLine);
 
   return lines;
+}
+
+export function createPortal({x, y, colour}) {
+  const portal = addPortal(x, y, colour)
+  portal.setDisplaySize(225, 275)
+  portal.refreshBody();
 }
 
 export function createLabel(config) {

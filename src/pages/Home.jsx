@@ -1,17 +1,17 @@
 import { useEffect, useRef } from "react";
+
 import Phaser from "phaser";
 
 import { initWorld } from "../game/world";
+
 import {
   initPlayer,
   updatePlayer,
-  moveUp,
-  moveLeft,
-  moveRight,
-  stopPlayer,
   respawn,
 } from "../game/player";
+
 import { initCollisions } from "../game/collisions";
+
 import {
   createStaticPlatform,
   createKillPlatform,
@@ -20,6 +20,7 @@ import {
   updatePlatforms,
   onPlatformTouched,
   createLabel,
+  createPortal
 } from "../game/platforms";
 
 import ArrowKey from "../components/ArrowKey";
@@ -66,12 +67,19 @@ export default function Home() {
       this.load.image("scratch", "/scratch.png");
       this.load.image("roblox", "/roblox.png");
       this.load.image("killPlatform", "/killPlatform.png")
+      this.load.image("redPortal", "/redPortalBlue.png")
     }
 
     function create() {
       player = initPlayer.call(this);
       initWorld.call(this, player);
       initCollisions.call(this, player, onPlatformTouched);
+
+      createPortal({
+        x:2200,
+        y:1200,
+        colour: "red"
+      })
 
       createLabel({
         text: "I'm Finn Brierley, an aspiring software engineer",
@@ -185,6 +193,7 @@ export default function Home() {
         width: 5000,
         height: 120,
       });
+
     }
 
     function update(time, delta) {
@@ -197,8 +206,8 @@ export default function Home() {
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1280,
-        height: 720,
+        width: 1500,
+        height: 1000,
       },
       parent: gameContainerRef.current,
       physics: {
