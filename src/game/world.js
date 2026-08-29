@@ -1,4 +1,4 @@
-const worldWidth = 4000;
+const worldWidth = 3600;
 const worldHeight = 12000;
 
 let scene

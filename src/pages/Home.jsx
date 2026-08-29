@@ -95,7 +95,7 @@ export default function Home() {
       });
 
       createStaticPlatform({
-        x: 2000,
+        x: 2200,
         y: 1350,
         width: 3200,
         height: 80,
@@ -103,7 +103,7 @@ export default function Home() {
 
       createLinearPlatform({
         axis: "y",
-        axisConstant: 200,
+        axisConstant: 250,
         width: 450,
         height: 180,
         start: 1400,
@@ -118,7 +118,7 @@ export default function Home() {
 
       createLabel({
         text: "MY JOURNEY",
-        x: 725,
+        x: 800,
         y: 1650,
         fontSize: 50,
         colour: "#00ffff",
@@ -129,16 +129,16 @@ export default function Home() {
       // ---------------------------------------------------------
 
       createStaticPlatform({
-        x: 725,
+        x: 800,
         y: 2000,
-        width: 700,
+        width: 550,
         height: 200,
         text:
           "At 10 years old I started creating games on Scratch",
       });
 
       const scratch = this.add.image(
-        725,
+        800,
         1800,
         "scratch"
       );
@@ -202,7 +202,7 @@ export default function Home() {
         x: 2175,
         y: 3400,
         width: 750,
-        height: 220,
+        height: 250,
         text:
           "Now I'm building larger software projects and experimenting with machine learning",
       });
@@ -212,10 +212,10 @@ export default function Home() {
       // =========================================================
 
       createPlatformRing({
-        x: 1417,
+        x: 1000,
         y: 3950,
-        width: 320,
-        height: 120,
+        width: 400,
+        height: 200,
         stringsDescription: "What I Code",
         strings: [
           "JavaScript",
@@ -270,7 +270,7 @@ export default function Home() {
       createStaticPlatform({
         x: 400,
         y: 5600,
-        width: 600,
+        width: 1400,
         height: 150,
         text: "AI Revision Website",
       });
@@ -278,38 +278,6 @@ export default function Home() {
       createLabel({
         text: "AI REVISION",
         x: 400,
-        y: 5100,
-        fontSize: 40,
-        colour: "#ff5555",
-      });
-
-      // =========================================================
-      // ROBLOX PROJECTS
-      // =========================================================
-
-      createPortal({
-        x: 1100,
-        y: 5300,
-        colour: "red",
-        options: {
-          demoURL:
-            "https://www.roblox.com/",
-          codeURL: "",
-          name: "Roblox Projects",
-        },
-      });
-
-      createStaticPlatform({
-        x: 1100,
-        y: 5600,
-        width: 600,
-        height: 150,
-        text: "Roblox Games",
-      });
-
-      createLabel({
-        text: "ROBLOX",
-        x: 1100,
         y: 5100,
         fontSize: 40,
         colour: "#ff5555",
@@ -335,7 +303,7 @@ export default function Home() {
       createStaticPlatform({
         x: 1900,
         y: 5600,
-        width: 600,
+        width: 1400,
         height: 150,
         text: "This Portfolio",
       });
@@ -349,44 +317,11 @@ export default function Home() {
       });
 
       // =========================================================
-      // MORE RECENT / EXPERIMENTAL WORK
-      // =========================================================
-
-      createPortal({
-        x: 2700,
-        y: 5300,
-        colour: "red",
-        options: {
-          demoURL:
-            "https://github.com/POrGSrPOGS",
-          codeURL:
-            "https://github.com/POrGSrPOGS",
-          name: "Other Projects",
-        },
-      });
-
-      createStaticPlatform({
-        x: 2700,
-        y: 5600,
-        width: 600,
-        height: 150,
-        text: "Other Projects",
-      });
-
-      createLabel({
-        text: "EXPERIMENTS",
-        x: 2700,
-        y: 5100,
-        fontSize: 40,
-        colour: "#ff5555",
-      });
-
-      // =========================================================
       // FUTURE PROJECT
       // =========================================================
 
       createStaticPlatform({
-        x: 3500,
+        x: 3000,
         y: 5300,
         width: 600,
         height: 150,
@@ -396,7 +331,7 @@ export default function Home() {
 
       createLabel({
         text: "COMING SOON",
-        x: 3500,
+        x: 3000,
         y: 5100,
         fontSize: 40,
         colour: "#32f142",
@@ -420,7 +355,7 @@ export default function Home() {
         width: 650,
         height: 170,
         text:
-          "Frontend — React, JavaScript, HTML, CSS",
+          "Frontend - React, JavaScript, HTML, CSS",
       });
 
       createStaticPlatform({
@@ -429,7 +364,7 @@ export default function Home() {
         width: 650,
         height: 170,
         text:
-          "Backend — Node.js, APIs, databases",
+          "Backend - Node.js, APIs, databases",
       });
 
       createStaticPlatform({
@@ -438,7 +373,7 @@ export default function Home() {
         width: 650,
         height: 170,
         text:
-          "Data — PostgreSQL, Prisma, classical ML",
+          "Data - PostgreSQL, Prisma, classical ML",
       });
 
       createStaticPlatform({
@@ -447,7 +382,7 @@ export default function Home() {
         width: 700,
         height: 170,
         text:
-          "Game Development — Phaser, Roblox Studio",
+          "Game Development - Phaser, Roblox Studio",
       });
 
       createStaticPlatform({
@@ -456,7 +391,7 @@ export default function Home() {
         width: 700,
         height: 170,
         text:
-          "Development — Git, Linux, APIs, modular systems",
+          "Development - Git, Linux, APIs, modular systems",
       });
 
       // =========================================================
@@ -466,7 +401,7 @@ export default function Home() {
       createLabel({
         text: "HOW I LIKE TO BUILD",
         x: 1417,
-        y: 7750,
+        y: 7350,
         fontSize: 60,
         colour: "#00ffff",
       });
@@ -475,7 +410,7 @@ export default function Home() {
         x: 1417,
         y: 8300,
         width: 320,
-        height: 120,
+        height: 200,
         stringsDescription: "My Code",
         strings: [
           "Modular",
@@ -494,7 +429,7 @@ export default function Home() {
       createLabel({
         text: "CURRENTLY BUILDING",
         x: 1417,
-        y: 9000,
+        y: 9300,
         fontSize: 60,
         colour: "#00ffff",
       });
@@ -505,7 +440,7 @@ export default function Home() {
         width: 700,
         height: 190,
         text:
-          "AI Tutor — adaptive revision using data and machine learning",
+          "AI Tutor - adaptive revision using data and machine learning",
       });
 
       createStaticPlatform({
@@ -530,13 +465,12 @@ export default function Home() {
         colour: "#32f142",
       });
 
-            createStaticPlatform({
+      createStaticPlatform({
         x: 1417,
         y: 10200,
         width: 700,
         height: 50,
-        text:
-          "",
+        text: "",
       });
 
       createLabel({
@@ -616,23 +550,26 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden bg-blue-950">
       {/* =====================================================
           PHASER GAME
       ====================================================== */}
 
-      <div ref={gameContainerRef} />
+      <div
+        ref={gameContainerRef}
+        className="max-h-full max-w-full"
+      />
 
       {/* =====================================================
           MOBILE CONTROLS
       ====================================================== */}
 
-      <div className="absolute bottom-8 left-8 z-10">
+      <div className="absolute bottom-6 left-6 z-10 flex gap-2">
         <ArrowKey direction="left" />
         <ArrowKey direction="right" />
       </div>
 
-      <div className="absolute bottom-8 right-8 z-10 flex flex-col">
+      <div className="absolute bottom-6 right-6 z-10 flex flex-col gap-2">
         <ArrowKey direction="up" />
         <ArrowKey direction="down" />
       </div>
@@ -644,14 +581,20 @@ export default function Home() {
       <button
         className="
           absolute
-          top-8
-          right-8
-          rounded
-          bg-red-500
+          top-6
+          right-6
+          z-10
+          rounded-full
+          bg-red-500/80
           px-4
           py-2
+          text-sm
+          font-medium
           text-white
-          opacity-50
+          shadow-md
+          backdrop-blur-sm
+          transition
+          hover:bg-red-500
           active:scale-95
         "
         onClick={respawn}

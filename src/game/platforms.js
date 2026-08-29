@@ -56,7 +56,7 @@ export function createPlatformRing(config) {
       height,
       centreX: x,
       centreY: y,
-      radius: 500,
+      radius: 700,
       velocity: 75,
       angle: angleInterval * index,
       text: string,
@@ -88,7 +88,7 @@ export function createLabel(config) {
 function attachLabel(platform, text) {
   const { x, y, displayWidth, displayHeight } = platform;
 
-  const fontSize = displayHeight / 5.5;
+  const fontSize = displayHeight / 6.2;
 
   const label = createLabel({
     text,

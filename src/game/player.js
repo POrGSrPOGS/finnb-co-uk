@@ -1,4 +1,4 @@
-const speed = 400;
+const speed = 4000;
 const jump = 650;
 
 const startX = 2835 - 150;
