@@ -24,14 +24,21 @@ export default function ArrowKey({ direction }) {
 
   return (
     <button
-      className="z-10"
-      onMouseDown={onDown}
-      onMouseUp={onUp}
-      onMouseLeave={onLeave}
-      onTouchStart={onDown}
-      onTouchEnd={onUp}
-    >
-      <img src={`/${direction}Arrow.png`} alt={direction} className={`${opacity} w-18 h-18 select-none pointer-events-none`} draggable={false}/>
-    </button>
+  className="z-10 touch-none select-none"
+  style={{ WebkitTouchCallout: "none" }}
+  onMouseDown={onDown}
+  onMouseUp={onUp}
+  onMouseLeave={onLeave}
+  onTouchStart={onDown}
+  onTouchEnd={onUp}
+  onContextMenu={(e) => e.preventDefault()}
+>
+  <img
+    src={`/${direction}Arrow.png`}
+    alt={direction}
+    className={`${opacity} w-18 h-18 pointer-events-none`}
+    draggable={false}
+  />
+</button>
   );
 }
