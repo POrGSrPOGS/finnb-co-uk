@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard.jsx"
 
