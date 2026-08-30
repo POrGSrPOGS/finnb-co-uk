@@ -1,4 +1,4 @@
-import { respawn, getAllowGravity, toggleAllowGravity } from "./player";
+import { respawn } from "./player";
 import { onPlatformTouched } from "./platforms";
 
 let staticPlatforms;
@@ -48,7 +48,7 @@ export function togglePlayerCollisions() {
     portalCollider.active = !portalCollider.active;
 }
 
-export function arePlayerCollisionsActive() {
+export function getPlayerCollisions() {
     return staticCollider.active && movingCollider.active && killCollider.active && portalCollider.active
 }
 

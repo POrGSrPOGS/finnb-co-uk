@@ -1,21 +1,21 @@
-import { arePlayerCollisionsActive } from "./collisions";
+import { getPlayerCollisions } from "./collisions";
+import {
+    isUpHeld,
+    isLeftHeld,
+    isRightHeld
+} from "./keys";
 
 const speed = 400;
 const jump = 650;
 
 const startX = 2835 - 150;
-const startY = (1453/2);
+const startY = 1453 / 2;
 
-let cursors
-let player
-
-let heldKeys = {}
+let player;
 
 export function initPlayer() {
   player = this.physics.add.sprite(startX, startY, "player");
   player.setDisplaySize(40, 40);
-
-  cursors = this.input.keyboard.createCursorKeys();
 
   return player;
 }
@@ -40,38 +40,28 @@ export function stopPlayer() {
   player.body.setVelocityX(0);
 }
 
-export function holdKey(key) {
-  heldKeys[key] = true
-}
-
-export function stopKey(key) {
-  heldKeys[key] = false
-}
-
-function isHeld(key) {
-  return heldKeys[key]
-}
-
 export function updatePlayer() {
-  if (cursors.left.isDown || isHeld("left")) {
-    moveLeft()
-
-  } else if (cursors.right.isDown || isHeld("right")) {
-    moveRight()
-
+  if (isLeftHeld()) {
+    moveLeft();
+  } else if (isRightHeld()) {
+    moveRight();
   } else {
-    stopPlayer()
+    stopPlayer();
   }
 
-  if ((cursors.up.isDown || isHeld("up")) && (player.body.blocked.down | !arePlayerCollisionsActive())) {
-    moveUp()
+  const canJump = player.body.blocked.down || !getPlayerCollisions();
+
+  if (isUpHeld() && canJump) {
+    moveUp();
   }
 }
 
-export function getAllowGravity() {
-  return player.body.moves
+export function getMoves() {
+  if (!player) return true;
+
+  return player.body.moves;
 }
 
-export function toggleAllowGravity() {
-  player.body.moves = !getAllowGravity();
+export function toggleMoves() {
+  player.body.moves = !getMoves();
 }

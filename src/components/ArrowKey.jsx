@@ -1,5 +1,5 @@
-import { holdKey, stopKey } from "../game/player";
-import { useEffect, useState } from "react";
+import { holdKey, stopKey } from "../game/keys";
+import { useState } from "react";
 
 export default function ArrowKey({ direction }) {
     const [isHeld, setHeld] = useState(false);

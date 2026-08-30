@@ -4,15 +4,15 @@ import Phaser from "phaser";
 
 import { initWorld } from "../game/world";
 
-import {
-  initPlayer,
-  updatePlayer,
-  respawn,
-  getAllowGravity,
-  toggleAllowGravity,
-} from "../game/player";
+import { initPlayer, updatePlayer } from "../game/player";
 
-import { initCollisions, togglePlayerCollisions } from "../game/collisions";
+import { initKeys } from "../game/keys";
+
+import Freeze from "../components/Freeze";
+import Respawn from "../components/Respawn";
+import Spectate from "../components/Spectate";
+
+import { initCollisions } from "../game/collisions";
 
 import {
   createStaticPlatform,
@@ -62,6 +62,8 @@ export default function Home() {
       initWorld.call(this, player);
 
       initCollisions.call(this, player, onPortalTouched);
+
+      initKeys.call(this)
 
       // =========================================================
       // INTRODUCTION
@@ -527,6 +529,16 @@ export default function Home() {
       <div ref={gameContainerRef} className="max-h-full max-w-full" />
 
       {/* =====================================================
+          BUTTONS
+      ====================================================== */}
+
+      <div className="absolute top-6 right-6 z-10 flex flex-wrap justify-end gap-3">
+        <Spectate />
+        <Freeze />
+        <Respawn />
+      </div>
+
+      {/* =====================================================
           MOBILE CONTROLS
       ====================================================== */}
 
@@ -539,94 +551,6 @@ export default function Home() {
         <ArrowKey direction="up" />
         <ArrowKey direction="down" />
       </div>
-
-      {/* =====================================================
-          RESPAWN BUTTON
-      ====================================================== */}
-
-      <button
-        className="
-          absolute
-          top-6
-          right-6
-          z-10
-          rounded-full
-          bg-red-500/80
-          px-4
-          py-2
-          text-sm
-          font-medium
-          text-white
-          shadow-md
-          backdrop-blur-sm
-          transition
-          hover:bg-red-500
-          active:scale-95
-        "
-        onClick={respawn}
-      >
-        Respawn
-      </button>
-
-      {/* =====================================================
-          SPECTATOR MODE
-      ====================================================== */}
-
-      <button
-        className="
-          absolute
-          top-6
-          right-30
-          z-10
-          rounded-full
-          bg-blue-500/80
-          px-4
-          py-2
-          text-sm
-          font-medium
-          text-white
-          shadow-md
-          backdrop-blur-sm
-          transition
-          hover:bg-blue-500
-          active:scale-95
-        "
-        onClick={() => {
-          togglePlayerCollisions();
-        }}
-      >
-        Toggle spectator mode
-      </button>
-
-      {/* =====================================================
-          FREEZE PLAYER
-      ====================================================== */}
-
-      <button
-        className="
-          absolute
-          top-6
-          right-76.5
-          z-10
-          rounded-full
-          bg-blue-200/80
-          px-4
-          py-2
-          text-sm
-          font-medium
-          text-black
-          shadow-md
-          backdrop-blur-sm
-          transition
-          hover:bg-blue-100
-          active:scale-95
-        "
-        onClick={() => {
-          toggleAllowGravity();
-        }}
-      >
-        Freeze
-      </button>
 
       {/* =====================================================
           PORTAL CONFIRMATION
