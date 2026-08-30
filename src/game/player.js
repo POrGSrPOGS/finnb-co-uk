@@ -8,8 +8,8 @@ import {
 const speed = 400;
 const jump = 650;
 
-const startX = 2835 - 150;
-const startY = 1453 / 2;
+const startX = 3000;
+const startY = 880;
 
 let player;
 
@@ -20,8 +20,12 @@ export function initPlayer() {
   return player;
 }
 
-export function respawn() {
-  player.setPosition(startX, startY);
+export function respawn(changeX) {
+  if (changeX === true) {
+    player.setPosition(startX, startY);
+  } else {
+    player.setPosition(player.x, startY);
+  }
 }
 
 export function moveUp(multiplier = 1) {

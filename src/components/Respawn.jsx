@@ -17,7 +17,7 @@ export default function Respawn({}) {
   hover:bg-red-500
   active:scale-95
 "
-      onClick={respawn}
+      onClick={() => {respawn(true)}}
     >
       Respawn
     </button>

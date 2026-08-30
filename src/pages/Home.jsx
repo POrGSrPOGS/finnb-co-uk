@@ -9,7 +9,9 @@ import { initPlayer, updatePlayer } from "../game/player";
 import { initKeys } from "../game/keys";
 
 import Freeze from "../components/Freeze";
+
 import Respawn from "../components/Respawn";
+
 import Spectate from "../components/Spectate";
 
 import { initCollisions } from "../game/collisions";
@@ -25,11 +27,11 @@ import {
 } from "../game/platforms";
 
 import ArrowKey from "../components/ArrowKey";
+
 import Confirmation from "../components/Confirmation";
 
 export default function Home() {
   const gameContainerRef = useRef(null);
-
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [portalOptions, setPortalOptions] = useState({});
 
@@ -48,7 +50,6 @@ export default function Home() {
       this.load.image("scratch", "/scratch.png");
       this.load.image("roblox", "/roblox.png");
       this.load.image("killPlatform", "/killPlatform.png");
-
       this.load.image("redPortal", "/redPortalBlue.png");
     }
 
@@ -58,12 +59,9 @@ export default function Home() {
       // =========================================================
 
       player = initPlayer.call(this);
-
       initWorld.call(this, player);
-
       initCollisions.call(this, player, onPortalTouched);
-
-      initKeys.call(this)
+      initKeys.call(this);
 
       // =========================================================
       // INTRODUCTION
@@ -72,7 +70,7 @@ export default function Home() {
       createLabel({
         text: "I'm Finn Brierley, an aspiring software engineer",
         x: 2200,
-        y: 800,
+        y: 1800,
         fontSize: 60,
         colour: "#02beb5",
       });
@@ -80,7 +78,7 @@ export default function Home() {
       createLabel({
         text: "<- Explore my journey",
         x: 1900,
-        y: 1100,
+        y: 2100,
         fontSize: 50,
         colour: "#32f142",
       });
@@ -88,14 +86,14 @@ export default function Home() {
       createLabel({
         text: "Here is where I began, where I am now, and the projects I've made along the way",
         x: 1200,
-        y: 1000,
+        y: 2000,
         fontSize: 50,
         colour: "#44bdb7",
       });
 
       createStaticPlatform({
         x: 2200,
-        y: 1350,
+        y: 2350,
         width: 3200,
         height: 80,
       });
@@ -105,8 +103,8 @@ export default function Home() {
         axisConstant: 250,
         width: 450,
         height: 180,
-        start: 1400,
-        end: 2000,
+        start: 2400,
+        end: 3000,
         text: "I've always had a love for designing and creating",
         velocity: 150,
       });
@@ -118,7 +116,7 @@ export default function Home() {
       createLabel({
         text: "MY JOURNEY",
         x: 800,
-        y: 1650,
+        y: 2650,
         fontSize: 50,
         colour: "#00ffff",
       });
@@ -129,14 +127,13 @@ export default function Home() {
 
       createStaticPlatform({
         x: 800,
-        y: 2000,
+        y: 3000,
         width: 550,
         height: 200,
         text: "At 10 years old I started creating games on Scratch",
       });
 
-      const scratch = this.add.image(800, 1800, "scratch");
-
+      const scratch = this.add.image(800, 2800, "scratch");
       scratch.setDisplaySize(200, 200);
       scratch.setAlpha(0.5);
 
@@ -146,14 +143,13 @@ export default function Home() {
 
       createStaticPlatform({
         x: 1425,
-        y: 2350,
+        y: 3350,
         width: 750,
         height: 220,
         text: "By 12 I was coding games in Roblox by modifying open source code",
       });
 
-      const roblox = this.add.image(1425, 2130, "roblox");
-
+      const roblox = this.add.image(1425, 3130, "roblox");
       roblox.setDisplaySize(180, 180);
       roblox.setAlpha(0.5);
 
@@ -163,7 +159,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 2175,
-        y: 2700,
+        y: 3700,
         width: 750,
         height: 220,
         text: "At 13 I started building entire Roblox games from scratch",
@@ -175,7 +171,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 2925,
-        y: 3050,
+        y: 4050,
         width: 750,
         height: 220,
         text: "I eventually moved into Python, JavaScript and web development",
@@ -187,7 +183,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 2175,
-        y: 3400,
+        y: 4400,
         width: 750,
         height: 250,
         text: "Now I'm building larger software projects and experimenting with machine learning",
@@ -199,7 +195,7 @@ export default function Home() {
 
       createPlatformRing({
         x: 1000,
-        y: 3950,
+        y: 4950,
         width: 400,
         height: 200,
         stringsDescription: "What I Code",
@@ -222,7 +218,7 @@ export default function Home() {
       createLabel({
         text: "PAST PROJECTS",
         x: 1417,
-        y: 4750,
+        y: 5750,
         fontSize: 60,
         colour: "#00ffff",
       });
@@ -230,7 +226,7 @@ export default function Home() {
       createLabel({
         text: "Walk into a portal to explore one of my projects",
         x: 1417,
-        y: 4870,
+        y: 5870,
         fontSize: 40,
         colour: "#88ffff",
       });
@@ -241,7 +237,7 @@ export default function Home() {
 
       createPortal({
         x: 400,
-        y: 5300,
+        y: 6300,
         colour: "red",
         options: {
           demoURL: "https://porgsrpogs.hackclub.app",
@@ -252,7 +248,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 400,
-        y: 5600,
+        y: 6600,
         width: 1400,
         height: 150,
         text: "AI Revision Website",
@@ -261,7 +257,7 @@ export default function Home() {
       createLabel({
         text: "AI REVISION",
         x: 400,
-        y: 5100,
+        y: 6100,
         fontSize: 40,
         colour: "#ff5555",
       });
@@ -272,7 +268,7 @@ export default function Home() {
 
       createPortal({
         x: 1900,
-        y: 5300,
+        y: 6300,
         colour: "red",
         options: {
           demoURL: window.location.href,
@@ -283,7 +279,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 1900,
-        y: 5600,
+        y: 6600,
         width: 1400,
         height: 150,
         text: "This Portfolio",
@@ -292,7 +288,7 @@ export default function Home() {
       createLabel({
         text: "THIS SITE",
         x: 1900,
-        y: 5100,
+        y: 6100,
         fontSize: 40,
         colour: "#ff5555",
       });
@@ -303,7 +299,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 3000,
-        y: 5300,
+        y: 6300,
         width: 600,
         height: 150,
         text: "More projects coming soon...",
@@ -312,7 +308,7 @@ export default function Home() {
       createLabel({
         text: "COMING SOON",
         x: 3000,
-        y: 5100,
+        y: 6100,
         fontSize: 40,
         colour: "#32f142",
       });
@@ -324,14 +320,14 @@ export default function Home() {
       createLabel({
         text: "TECHNICAL SKILLS",
         x: 1417,
-        y: 6200,
+        y: 7200,
         fontSize: 60,
         colour: "#00ffff",
       });
 
       createStaticPlatform({
         x: 500,
-        y: 6550,
+        y: 7550,
         width: 650,
         height: 170,
         text: "Frontend - React, JavaScript, HTML, CSS",
@@ -339,7 +335,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 1417,
-        y: 6550,
+        y: 7550,
         width: 650,
         height: 170,
         text: "Backend - Node.js, APIs, databases",
@@ -347,7 +343,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 2335,
-        y: 6550,
+        y: 7550,
         width: 650,
         height: 170,
         text: "Data - PostgreSQL, Prisma, classical ML",
@@ -355,7 +351,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 950,
-        y: 7000,
+        y: 8000,
         width: 700,
         height: 170,
         text: "Game Development - Phaser, Roblox Studio",
@@ -363,7 +359,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 1950,
-        y: 7000,
+        y: 8000,
         width: 700,
         height: 170,
         text: "Development - Git, Linux, APIs, modular systems",
@@ -376,14 +372,14 @@ export default function Home() {
       createLabel({
         text: "HOW I LIKE TO BUILD",
         x: 1417,
-        y: 7350,
+        y: 8350,
         fontSize: 60,
         colour: "#00ffff",
       });
 
       createPlatformRing({
         x: 1417,
-        y: 8300,
+        y: 9300,
         width: 320,
         height: 200,
         stringsDescription: "My Code",
@@ -404,14 +400,14 @@ export default function Home() {
       createLabel({
         text: "CURRENTLY BUILDING",
         x: 1417,
-        y: 9300,
+        y: 10300,
         fontSize: 60,
         colour: "#00ffff",
       });
 
       createStaticPlatform({
         x: 700,
-        y: 9400,
+        y: 10400,
         width: 700,
         height: 190,
         text: "AI Tutor - adaptive revision using data and machine learning",
@@ -419,7 +415,7 @@ export default function Home() {
 
       createStaticPlatform({
         x: 2150,
-        y: 9400,
+        y: 10400,
         width: 700,
         height: 190,
         text: "More experimental software and game projects",
@@ -432,14 +428,14 @@ export default function Home() {
       createLabel({
         text: "The interesting part is what comes next.",
         x: 1417,
-        y: 9900,
+        y: 10900,
         fontSize: 50,
         colour: "#32f142",
       });
 
       createStaticPlatform({
         x: 1417,
-        y: 10200,
+        y: 11200,
         width: 700,
         height: 50,
         text: "",
@@ -448,7 +444,7 @@ export default function Home() {
       createLabel({
         text: "THANKS FOR EXPLORING",
         x: 1417,
-        y: 10400,
+        y: 11400,
         fontSize: 65,
         colour: "#00ffff",
       });
@@ -456,7 +452,7 @@ export default function Home() {
       createLabel({
         text: "More projects coming soon...",
         x: 1417,
-        y: 10550,
+        y: 11550,
         fontSize: 45,
         colour: "#88ffff",
       });
@@ -467,7 +463,7 @@ export default function Home() {
 
       createKillPlatform({
         x: 1417,
-        y: 11000,
+        y: 14000,
         width: 6000,
         height: 150,
       });
@@ -484,28 +480,22 @@ export default function Home() {
 
     const config = {
       type: Phaser.AUTO,
-
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 1500,
         height: 1000,
       },
-
       parent: gameContainerRef.current,
-
       physics: {
         default: "arcade",
-
         arcade: {
           gravity: {
             y: 600,
           },
-
           debug: false,
         },
       },
-
       scene: {
         preload,
         create,

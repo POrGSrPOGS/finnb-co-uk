@@ -9,7 +9,7 @@ export function teleport(url) {
     debounce = true
 
     window.open(url, "_blank");
-    //respawn()
+    respawn(true)
 
 
     debounce = false

@@ -116,6 +116,7 @@ export function createKillPlatform(config) {
   const platform = addKillPlatform(x, y);
   platform.setDisplaySize(width, height);
   platform.refreshBody();
+  platform.setVisible(false);
 
   attachLabel(platform, text);
 }
