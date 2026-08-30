@@ -8,9 +8,11 @@ import {
   initPlayer,
   updatePlayer,
   respawn,
+  getAllowGravity,
+  toggleAllowGravity,
 } from "../game/player";
 
-import { initCollisions } from "../game/collisions";
+import { initCollisions, togglePlayerCollisions } from "../game/collisions";
 
 import {
   createStaticPlatform,
@@ -59,11 +61,7 @@ export default function Home() {
 
       initWorld.call(this, player);
 
-      initCollisions.call(
-        this,
-        player,
-        onPortalTouched
-      );
+      initCollisions.call(this, player, onPortalTouched);
 
       // =========================================================
       // INTRODUCTION
@@ -86,8 +84,7 @@ export default function Home() {
       });
 
       createLabel({
-        text:
-          "Here is where I began, where I am now, and the projects I've made along the way",
+        text: "Here is where I began, where I am now, and the projects I've made along the way",
         x: 1200,
         y: 1000,
         fontSize: 50,
@@ -133,15 +130,10 @@ export default function Home() {
         y: 2000,
         width: 550,
         height: 200,
-        text:
-          "At 10 years old I started creating games on Scratch",
+        text: "At 10 years old I started creating games on Scratch",
       });
 
-      const scratch = this.add.image(
-        800,
-        1800,
-        "scratch"
-      );
+      const scratch = this.add.image(800, 1800, "scratch");
 
       scratch.setDisplaySize(200, 200);
       scratch.setAlpha(0.5);
@@ -155,15 +147,10 @@ export default function Home() {
         y: 2350,
         width: 750,
         height: 220,
-        text:
-          "By 12 I was coding games in Roblox by modifying open source code",
+        text: "By 12 I was coding games in Roblox by modifying open source code",
       });
 
-      const roblox = this.add.image(
-        1425,
-        2130,
-        "roblox"
-      );
+      const roblox = this.add.image(1425, 2130, "roblox");
 
       roblox.setDisplaySize(180, 180);
       roblox.setAlpha(0.5);
@@ -177,8 +164,7 @@ export default function Home() {
         y: 2700,
         width: 750,
         height: 220,
-        text:
-          "At 13 I started building entire Roblox games from scratch",
+        text: "At 13 I started building entire Roblox games from scratch",
       });
 
       // ---------------------------------------------------------
@@ -190,8 +176,7 @@ export default function Home() {
         y: 3050,
         width: 750,
         height: 220,
-        text:
-          "I eventually moved into Python, JavaScript and web development",
+        text: "I eventually moved into Python, JavaScript and web development",
       });
 
       // ---------------------------------------------------------
@@ -203,8 +188,7 @@ export default function Home() {
         y: 3400,
         width: 750,
         height: 250,
-        text:
-          "Now I'm building larger software projects and experimenting with machine learning",
+        text: "Now I'm building larger software projects and experimenting with machine learning",
       });
 
       // =========================================================
@@ -242,8 +226,7 @@ export default function Home() {
       });
 
       createLabel({
-        text:
-          "Walk into a portal to explore one of my projects",
+        text: "Walk into a portal to explore one of my projects",
         x: 1417,
         y: 4870,
         fontSize: 40,
@@ -259,10 +242,8 @@ export default function Home() {
         y: 5300,
         colour: "red",
         options: {
-          demoURL:
-            "https://porgsrpogs.hackclub.app",
-          codeURL:
-            "https://github.com/POrGSrPOGS/ai-revision-website",
+          demoURL: "https://porgsrpogs.hackclub.app",
+          codeURL: "https://github.com/POrGSrPOGS/ai-revision-website",
           name: "AI Revision Website",
         },
       });
@@ -292,10 +273,8 @@ export default function Home() {
         y: 5300,
         colour: "red",
         options: {
-          demoURL:
-            window.location.href,
-          codeURL:
-            "https://github.com/POrGSrPOGS/finnb-co-uk",
+          demoURL: window.location.href,
+          codeURL: "https://github.com/POrGSrPOGS/finnb-co-uk",
           name: "This Portfolio",
         },
       });
@@ -325,8 +304,7 @@ export default function Home() {
         y: 5300,
         width: 600,
         height: 150,
-        text:
-          "More projects coming soon...",
+        text: "More projects coming soon...",
       });
 
       createLabel({
@@ -354,8 +332,7 @@ export default function Home() {
         y: 6550,
         width: 650,
         height: 170,
-        text:
-          "Frontend - React, JavaScript, HTML, CSS",
+        text: "Frontend - React, JavaScript, HTML, CSS",
       });
 
       createStaticPlatform({
@@ -363,8 +340,7 @@ export default function Home() {
         y: 6550,
         width: 650,
         height: 170,
-        text:
-          "Backend - Node.js, APIs, databases",
+        text: "Backend - Node.js, APIs, databases",
       });
 
       createStaticPlatform({
@@ -372,8 +348,7 @@ export default function Home() {
         y: 6550,
         width: 650,
         height: 170,
-        text:
-          "Data - PostgreSQL, Prisma, classical ML",
+        text: "Data - PostgreSQL, Prisma, classical ML",
       });
 
       createStaticPlatform({
@@ -381,8 +356,7 @@ export default function Home() {
         y: 7000,
         width: 700,
         height: 170,
-        text:
-          "Game Development - Phaser, Roblox Studio",
+        text: "Game Development - Phaser, Roblox Studio",
       });
 
       createStaticPlatform({
@@ -390,8 +364,7 @@ export default function Home() {
         y: 7000,
         width: 700,
         height: 170,
-        text:
-          "Development - Git, Linux, APIs, modular systems",
+        text: "Development - Git, Linux, APIs, modular systems",
       });
 
       // =========================================================
@@ -439,8 +412,7 @@ export default function Home() {
         y: 9400,
         width: 700,
         height: 190,
-        text:
-          "AI Tutor - adaptive revision using data and machine learning",
+        text: "AI Tutor - adaptive revision using data and machine learning",
       });
 
       createStaticPlatform({
@@ -448,8 +420,7 @@ export default function Home() {
         y: 9400,
         width: 700,
         height: 190,
-        text:
-          "More experimental software and game projects",
+        text: "More experimental software and game projects",
       });
 
       // =========================================================
@@ -457,8 +428,7 @@ export default function Home() {
       // =========================================================
 
       createLabel({
-        text:
-          "The interesting part is what comes next.",
+        text: "The interesting part is what comes next.",
         x: 1417,
         y: 9900,
         fontSize: 50,
@@ -482,8 +452,7 @@ export default function Home() {
       });
 
       createLabel({
-        text:
-          "More projects coming soon...",
+        text: "More projects coming soon...",
         x: 1417,
         y: 10550,
         fontSize: 45,
@@ -555,10 +524,7 @@ export default function Home() {
           PHASER GAME
       ====================================================== */}
 
-      <div
-        ref={gameContainerRef}
-        className="max-h-full max-w-full"
-      />
+      <div ref={gameContainerRef} className="max-h-full max-w-full" />
 
       {/* =====================================================
           MOBILE CONTROLS
@@ -600,6 +566,66 @@ export default function Home() {
         onClick={respawn}
       >
         Respawn
+      </button>
+
+      {/* =====================================================
+          SPECTATOR MODE
+      ====================================================== */}
+
+      <button
+        className="
+          absolute
+          top-6
+          right-30
+          z-10
+          rounded-full
+          bg-blue-500/80
+          px-4
+          py-2
+          text-sm
+          font-medium
+          text-white
+          shadow-md
+          backdrop-blur-sm
+          transition
+          hover:bg-blue-500
+          active:scale-95
+        "
+        onClick={() => {
+          togglePlayerCollisions();
+        }}
+      >
+        Toggle spectator mode
+      </button>
+
+      {/* =====================================================
+          FREEZE PLAYER
+      ====================================================== */}
+
+      <button
+        className="
+          absolute
+          top-6
+          right-76.5
+          z-10
+          rounded-full
+          bg-blue-200/80
+          px-4
+          py-2
+          text-sm
+          font-medium
+          text-black
+          shadow-md
+          backdrop-blur-sm
+          transition
+          hover:bg-blue-100
+          active:scale-95
+        "
+        onClick={() => {
+          toggleAllowGravity();
+        }}
+      >
+        Freeze
       </button>
 
       {/* =====================================================

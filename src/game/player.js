@@ -1,3 +1,5 @@
+import { arePlayerCollisionsActive } from "./collisions";
+
 const speed = 400;
 const jump = 650;
 
@@ -23,9 +25,7 @@ export function respawn() {
 }
 
 export function moveUp(multiplier = 1) {
-  //if (player.body.blocked.down) {
-    player.body.setVelocityY(-jump * multiplier);
-  //}
+  player.body.setVelocityY(-jump * multiplier);
 }
 
 export function moveLeft() {
@@ -63,7 +63,15 @@ export function updatePlayer() {
     stopPlayer()
   }
 
-  if ((cursors.up.isDown || isHeld("up")) && player.body.blocked.down) {
+  if ((cursors.up.isDown || isHeld("up")) && (player.body.blocked.down | !arePlayerCollisionsActive())) {
     moveUp()
   }
+}
+
+export function getAllowGravity() {
+  return player.body.moves
+}
+
+export function toggleAllowGravity() {
+  player.body.moves = !getAllowGravity();
 }
