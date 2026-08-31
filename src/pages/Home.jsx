@@ -29,14 +29,139 @@ import {
 import ArrowKey from "../components/ArrowKey";
 
 import Confirmation from "../components/Confirmation";
+import ContactModal from "../components/ContactModal";
+import ContactButton from "../components/ContactButton";
+
+const CYAN = "#00ffff";
+const LIGHT_CYAN = "#88ffff";
+const TEAL = "#02beb5";
+const MID_TEAL = "#44bdb7";
+const GREEN = "#32f142";
+const RED = "#ff5555";
+
+const PORTAL_WIDTH = 100;
+const PORTAL_HEIGHT = 200;
+
+const JOURNEY_STEPS = [
+  {
+    x: 800,
+    y: 3000,
+    width: 550,
+    height: 200,
+    text: "At 10 years old I started creating games on Scratch",
+    image: { key: "scratch", y: 2800, size: 200 },
+  },
+  {
+    x: 1425,
+    y: 3350,
+    width: 750,
+    height: 220,
+    text: "By 12 I was coding games in Roblox by modifying open source code",
+    image: { key: "roblox", y: 3130, size: 180 },
+  },
+  {
+    x: 2175,
+    y: 3700,
+    width: 750,
+    height: 220,
+    text: "At 13 I started building entire Roblox games from scratch",
+  },
+  {
+    x: 2925,
+    y: 4050,
+    width: 750,
+    height: 220,
+    text: "I eventually moved into Python, JavaScript and web development",
+  },
+  {
+    x: 2175,
+    y: 4400,
+    width: 750,
+    height: 250,
+    text: "Now I'm building larger software projects and experimenting with machine learning",
+  },
+];
+
+const PROJECTS_PLATFORM_HEIGHT = 150;
+
+const PROJECTS_Y = {
+  label: 6100,
+  platform: 6600,
+};
+
+PROJECTS_Y.portal =
+  PROJECTS_Y.platform - PROJECTS_PLATFORM_HEIGHT / 2 - PORTAL_HEIGHT / 2;
+
+const PROJECTS = [
+  {
+    x: 800,
+    platformWidth: 1200,
+    text: "AI Revision Website",
+    label: "AI REVISION",
+    labelColour: RED,
+    portal: {
+      demoURL: "https://porgsrpogs.hackclub.app",
+      codeURL: "https://github.com/POrGSrPOGS/ai-revision-website",
+      name: "AI Revision Website",
+    },
+  },
+  {
+    x: 2100,
+    platformWidth: 1200,
+    text: "This Portfolio",
+    label: "THIS SITE",
+    labelColour: RED,
+    portal: {
+      demoURL: typeof window !== "undefined" ? window.location.href : "",
+      codeURL: "https://github.com/POrGSrPOGS/finnb-co-uk",
+      name: "This Portfolio",
+    },
+  },
+  {
+    x: 3100,
+    platformWidth: 500,
+    text: "More projects coming soon...",
+    label: "COMING SOON",
+    labelColour: GREEN,
+    portal: null,
+  },
+];
+
+const SKILLS = [
+  { x: 500, y: 7550, width: 650, height: 170, text: "Frontend - React, JavaScript, HTML, CSS" },
+  { x: 1417, y: 7550, width: 650, height: 170, text: "Backend - Node.js, APIs, databases" },
+  { x: 2335, y: 7550, width: 650, height: 170, text: "Data - PostgreSQL, Prisma, classical ML" },
+  { x: 950, y: 8000, width: 700, height: 170, text: "Game Development - Phaser, Roblox Studio" },
+  { x: 1950, y: 8000, width: 700, height: 170, text: "Development - Git, Linux, APIs, modular systems" },
+];
+
+const CURRENT_WORK = [
+  { x: 700, width: 700, height: 190, text: "AI Tutor - adaptive revision using data and machine learning" },
+  { x: 2150, width: 700, height: 190, text: "More experimental software and game projects" },
+];
+
+const CONTACT_LINKS = [
+  { label: "Email Me (finnbrierley@gmail.com)", url: "mailto:finnbrierley@gmail.com" },
+  { label: "GitHub (POrGSrPOGS)", url: "https://github.com/POrGSrPOGS" },
+  //{ label: "LinkedIn (Finn Brierley)", url: "https://www.linkedin.com/in/finn-%E2%80%8Ebrierley-6b78153a0/" },
+  { label: "Resume (PDF)", url: "/resume.pdf" },
+];
 
 export default function Home() {
   const gameContainerRef = useRef(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const [portalOptions, setPortalOptions] = useState({});
 
   function onPortalTouched(player, portal) {
-    setPortalOptions(portal.getData("options") || {});
+    const options = portal.getData("options") || {};
+
+    if (options.type === "contact") {
+      setShowContact(true);
+      return;
+    }
+
+    setPortalOptions(options);
     setShowConfirmation(true);
   }
 
@@ -51,28 +176,21 @@ export default function Home() {
       this.load.image("roblox", "/roblox.png");
       this.load.image("killPlatform", "/killPlatform.png");
       this.load.image("redPortal", "/redPortalBlue.png");
+      this.load.image("bluePortal", "/bluePortalBlue.png");
     }
 
     function create() {
-      // =========================================================
-      // INITIALISE GAME
-      // =========================================================
-
       player = initPlayer.call(this);
       initWorld.call(this, player);
       initCollisions.call(this, player, onPortalTouched);
       initKeys.call(this);
-
-      // =========================================================
-      // INTRODUCTION
-      // =========================================================
 
       createLabel({
         text: "I'm Finn Brierley, an aspiring software engineer",
         x: 2200,
         y: 1800,
         fontSize: 60,
-        colour: "#02beb5",
+        colour: TEAL,
       });
 
       createLabel({
@@ -80,7 +198,7 @@ export default function Home() {
         x: 1900,
         y: 2100,
         fontSize: 50,
-        colour: "#32f142",
+        colour: GREEN,
       });
 
       createLabel({
@@ -88,7 +206,7 @@ export default function Home() {
         x: 1200,
         y: 2000,
         fontSize: 50,
-        colour: "#44bdb7",
+        colour: MID_TEAL,
       });
 
       createStaticPlatform({
@@ -109,89 +227,29 @@ export default function Home() {
         velocity: 150,
       });
 
-      // =========================================================
-      // PROGRAMMING JOURNEY
-      // =========================================================
-
       createLabel({
         text: "MY JOURNEY",
         x: 800,
         y: 2650,
         fontSize: 50,
-        colour: "#00ffff",
+        colour: CYAN,
       });
 
-      // ---------------------------------------------------------
-      // SCRATCH
-      // ---------------------------------------------------------
+      for (const step of JOURNEY_STEPS) {
+        createStaticPlatform({
+          x: step.x,
+          y: step.y,
+          width: step.width,
+          height: step.height,
+          text: step.text,
+        });
 
-      createStaticPlatform({
-        x: 800,
-        y: 3000,
-        width: 550,
-        height: 200,
-        text: "At 10 years old I started creating games on Scratch",
-      });
-
-      const scratch = this.add.image(800, 2800, "scratch");
-      scratch.setDisplaySize(200, 200);
-      scratch.setAlpha(0.5);
-
-      // ---------------------------------------------------------
-      // ROBLOX
-      // ---------------------------------------------------------
-
-      createStaticPlatform({
-        x: 1425,
-        y: 3350,
-        width: 750,
-        height: 220,
-        text: "By 12 I was coding games in Roblox by modifying open source code",
-      });
-
-      const roblox = this.add.image(1425, 3130, "roblox");
-      roblox.setDisplaySize(180, 180);
-      roblox.setAlpha(0.5);
-
-      // ---------------------------------------------------------
-      // ROBLOX FROM SCRATCH
-      // ---------------------------------------------------------
-
-      createStaticPlatform({
-        x: 2175,
-        y: 3700,
-        width: 750,
-        height: 220,
-        text: "At 13 I started building entire Roblox games from scratch",
-      });
-
-      // ---------------------------------------------------------
-      // WEB DEVELOPMENT
-      // ---------------------------------------------------------
-
-      createStaticPlatform({
-        x: 2925,
-        y: 4050,
-        width: 750,
-        height: 220,
-        text: "I eventually moved into Python, JavaScript and web development",
-      });
-
-      // ---------------------------------------------------------
-      // CURRENT DEVELOPMENT
-      // ---------------------------------------------------------
-
-      createStaticPlatform({
-        x: 2175,
-        y: 4400,
-        width: 750,
-        height: 250,
-        text: "Now I'm building larger software projects and experimenting with machine learning",
-      });
-
-      // =========================================================
-      // WHAT I CODE
-      // =========================================================
+        if (step.image) {
+          const sprite = this.add.image(step.x, step.image.y, step.image.key);
+          sprite.setDisplaySize(step.image.size, step.image.size);
+          sprite.setAlpha(0.5);
+        }
+      }
 
       createPlatformRing({
         x: 1000,
@@ -211,16 +269,12 @@ export default function Home() {
         ],
       });
 
-      // =========================================================
-      // PROJECTS
-      // =========================================================
-
       createLabel({
         text: "PAST PROJECTS",
         x: 1417,
         y: 5750,
         fontSize: 60,
-        colour: "#00ffff",
+        colour: CYAN,
       });
 
       createLabel({
@@ -228,153 +282,54 @@ export default function Home() {
         x: 1417,
         y: 5870,
         fontSize: 40,
-        colour: "#88ffff",
+        colour: LIGHT_CYAN,
       });
 
-      // =========================================================
-      // AI REVISION WEBSITE
-      // =========================================================
+      for (const project of PROJECTS) {
+        if (project.portal) {
+          createPortal({
+            x: project.x,
+            y: PROJECTS_Y.portal,
+            colour: "red",
+            options: project.portal,
+          });
+        }
 
-      createPortal({
-        x: 400,
-        y: 6300,
-        colour: "red",
-        options: {
-          demoURL: "https://porgsrpogs.hackclub.app",
-          codeURL: "https://github.com/POrGSrPOGS/ai-revision-website",
-          name: "AI Revision Website",
-        },
-      });
+        createStaticPlatform({
+          x: project.x,
+          y: PROJECTS_Y.platform,
+          width: project.platformWidth,
+          height: 150,
+          text: project.text,
+        });
 
-      createStaticPlatform({
-        x: 400,
-        y: 6600,
-        width: 1400,
-        height: 150,
-        text: "AI Revision Website",
-      });
-
-      createLabel({
-        text: "AI REVISION",
-        x: 400,
-        y: 6100,
-        fontSize: 40,
-        colour: "#ff5555",
-      });
-
-      // =========================================================
-      // THIS PORTFOLIO
-      // =========================================================
-
-      createPortal({
-        x: 1900,
-        y: 6300,
-        colour: "red",
-        options: {
-          demoURL: window.location.href,
-          codeURL: "https://github.com/POrGSrPOGS/finnb-co-uk",
-          name: "This Portfolio",
-        },
-      });
-
-      createStaticPlatform({
-        x: 1900,
-        y: 6600,
-        width: 1400,
-        height: 150,
-        text: "This Portfolio",
-      });
-
-      createLabel({
-        text: "THIS SITE",
-        x: 1900,
-        y: 6100,
-        fontSize: 40,
-        colour: "#ff5555",
-      });
-
-      // =========================================================
-      // FUTURE PROJECT
-      // =========================================================
-
-      createStaticPlatform({
-        x: 3000,
-        y: 6300,
-        width: 600,
-        height: 150,
-        text: "More projects coming soon...",
-      });
-
-      createLabel({
-        text: "COMING SOON",
-        x: 3000,
-        y: 6100,
-        fontSize: 40,
-        colour: "#32f142",
-      });
-
-      // =========================================================
-      // TECHNICAL SKILLS
-      // =========================================================
+        createLabel({
+          text: project.label,
+          x: project.x,
+          y: PROJECTS_Y.label,
+          fontSize: 40,
+          colour: project.labelColour,
+        });
+      }
 
       createLabel({
         text: "TECHNICAL SKILLS",
         x: 1417,
         y: 7200,
         fontSize: 60,
-        colour: "#00ffff",
+        colour: CYAN,
       });
 
-      createStaticPlatform({
-        x: 500,
-        y: 7550,
-        width: 650,
-        height: 170,
-        text: "Frontend - React, JavaScript, HTML, CSS",
-      });
-
-      createStaticPlatform({
-        x: 1417,
-        y: 7550,
-        width: 650,
-        height: 170,
-        text: "Backend - Node.js, APIs, databases",
-      });
-
-      createStaticPlatform({
-        x: 2335,
-        y: 7550,
-        width: 650,
-        height: 170,
-        text: "Data - PostgreSQL, Prisma, classical ML",
-      });
-
-      createStaticPlatform({
-        x: 950,
-        y: 8000,
-        width: 700,
-        height: 170,
-        text: "Game Development - Phaser, Roblox Studio",
-      });
-
-      createStaticPlatform({
-        x: 1950,
-        y: 8000,
-        width: 700,
-        height: 170,
-        text: "Development - Git, Linux, APIs, modular systems",
-      });
-
-      // =========================================================
-      // CODE PHILOSOPHY
-      // =========================================================
+      for (const skill of SKILLS) {
+        createStaticPlatform(skill);
+      }
 
       createLabel({
         text: "HOW I LIKE TO BUILD",
         x: 1417,
         y: 8350,
         fontSize: 60,
-        colour: "#00ffff",
+        colour: CYAN,
       });
 
       createPlatformRing({
@@ -393,44 +348,30 @@ export default function Home() {
         ],
       });
 
-      // =========================================================
-      // CURRENT WORK
-      // =========================================================
-
       createLabel({
         text: "CURRENTLY BUILDING",
         x: 1417,
         y: 10300,
         fontSize: 60,
-        colour: "#00ffff",
+        colour: CYAN,
       });
 
-      createStaticPlatform({
-        x: 700,
-        y: 10400,
-        width: 700,
-        height: 190,
-        text: "AI Tutor - adaptive revision using data and machine learning",
-      });
-
-      createStaticPlatform({
-        x: 2150,
-        y: 10400,
-        width: 700,
-        height: 190,
-        text: "More experimental software and game projects",
-      });
-
-      // =========================================================
-      // END MESSAGE
-      // =========================================================
+      for (const item of CURRENT_WORK) {
+        createStaticPlatform({
+          x: item.x,
+          y: 10400,
+          width: item.width,
+          height: item.height,
+          text: item.text,
+        });
+      }
 
       createLabel({
         text: "The interesting part is what comes next.",
         x: 1417,
         y: 10900,
         fontSize: 50,
-        colour: "#32f142",
+        colour: GREEN,
       });
 
       createStaticPlatform({
@@ -446,7 +387,7 @@ export default function Home() {
         x: 1417,
         y: 11400,
         fontSize: 65,
-        colour: "#00ffff",
+        colour: CYAN,
       });
 
       createLabel({
@@ -454,16 +395,38 @@ export default function Home() {
         x: 1417,
         y: 11550,
         fontSize: 45,
-        colour: "#88ffff",
+        colour: LIGHT_CYAN,
       });
 
-      // =========================================================
-      // KILL FLOOR
-      // =========================================================
+      createLabel({
+        text: "GET IN TOUCH",
+        x: 2417,
+        y: 11000,
+        fontSize: 50,
+        colour: CYAN,
+      });
+
+      createPortal({
+        x: 2417,
+        y: 11200,
+        colour: "blue",
+        options: {
+          type: "contact",
+          name: "Get In Touch",
+        },
+      });
+
+      createStaticPlatform({
+        x: 2417,
+        y: 11400,
+        width: 700,
+        height: 150,
+        text: "Walk in to find my contact details!",
+      });
 
       createKillPlatform({
         x: 1417,
-        y: 14000,
+        y: 13000,
         width: 6000,
         height: 150,
       });
@@ -473,10 +436,6 @@ export default function Home() {
       updatePlayer(player, cursors);
       updatePlatforms(time, delta);
     }
-
-    // =========================================================
-    // PHASER CONFIG
-    // =========================================================
 
     const config = {
       type: Phaser.AUTO,
@@ -512,25 +471,14 @@ export default function Home() {
 
   return (
     <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden bg-blue-950">
-      {/* =====================================================
-          PHASER GAME
-      ====================================================== */}
-
       <div ref={gameContainerRef} className="max-h-full max-w-full" />
-
-      {/* =====================================================
-          BUTTONS
-      ====================================================== */}
 
       <div className="absolute top-6 right-6 z-10 flex flex-wrap justify-end gap-3">
         <Spectate />
         <Freeze />
         <Respawn />
+        <ContactButton onClick={() => setShowContact(true)} />
       </div>
-
-      {/* =====================================================
-          MOBILE CONTROLS
-      ====================================================== */}
 
       <div className="absolute bottom-6 left-6 z-10 flex gap-2">
         <ArrowKey direction="left" />
@@ -542,10 +490,6 @@ export default function Home() {
         <ArrowKey direction="down" />
       </div>
 
-      {/* =====================================================
-          PORTAL CONFIRMATION
-      ====================================================== */}
-
       {showConfirmation && (
         <Confirmation
           details={
@@ -556,6 +500,15 @@ export default function Home() {
           codeURL={portalOptions.codeURL}
           onChosen={() => {
             setShowConfirmation(false);
+          }}
+        />
+      )}
+
+      {showContact && (
+        <ContactModal
+          links={CONTACT_LINKS}
+          onChosen={() => {
+            setShowContact(false);
           }}
         />
       )}

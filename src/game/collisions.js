@@ -1,69 +1,94 @@
 import { respawn } from "./player";
+
 import { onPlatformTouched } from "./platforms";
 
-let staticPlatforms;
-let movingPlatforms;
-let killPlatforms;
-let portals;
+let platforms = {
+    static: null,
+    moving: null,
+    kill: null,
+    portals: null,
+};
 
-let staticCollider;
-let movingCollider;
-let killCollider;
-let portalCollider;
+let colliders = {
+    static: null,
+    moving: null,
+    kill: null,
+    portals: null,
+};
 
 export function initCollisions(player, onPortalTouched) {
-    staticPlatforms = this.physics.add.staticGroup();
-    movingPlatforms = this.physics.add.group();
-    killPlatforms = this.physics.add.staticGroup();
-    portals = this.physics.add.staticGroup();
+    platforms.static = this.physics.add.staticGroup();
 
-    staticCollider = this.physics.add.collider(
+    platforms.moving = this.physics.add.group();
+
+    platforms.kill = this.physics.add.staticGroup();
+
+    platforms.portals = this.physics.add.staticGroup();
+
+    colliders.static = this.physics.add.collider(
         player,
-        staticPlatforms
+        platforms.static
     );
 
-    movingCollider = this.physics.add.collider(
+    colliders.moving = this.physics.add.collider(
         player,
-        movingPlatforms,
+        platforms.moving,
         onPlatformTouched
     );
 
-    killCollider = this.physics.add.collider(
+    colliders.kill = this.physics.add.collider(
         player,
-        killPlatforms,
+        platforms.kill,
         respawn
     );
 
-    portalCollider = this.physics.add.collider(
+    colliders.portals = this.physics.add.collider(
         player,
-        portals,
+        platforms.portals,
         onPortalTouched
     );
 }
 
 export function togglePlayerCollisions() {
-    staticCollider.active = !staticCollider.active;
-    movingCollider.active = !movingCollider.active;
-    killCollider.active = !killCollider.active;
-    portalCollider.active = !portalCollider.active;
+    for (const collider of Object.values(colliders)) {
+        collider.active = !collider.active;
+    }
 }
 
 export function getPlayerCollisions() {
-    return staticCollider.active && movingCollider.active && killCollider.active && portalCollider.active
+    return Object.values(colliders).every(
+        collider => collider.active
+    );
 }
 
 export function addStaticPlatform(x, y) {
-    return staticPlatforms.create(x, y, "platform");
+    return platforms.static.create(
+        x,
+        y,
+        "platform"
+    );
 }
 
 export function addMovingPlatform(x, y) {
-    return movingPlatforms.create(x, y, "platform");
+    return platforms.moving.create(
+        x,
+        y,
+        "platform"
+    );
 }
 
 export function addKillPlatform(x, y) {
-    return killPlatforms.create(x, y, "killPlatform");
+    return platforms.kill.create(
+        x,
+        y,
+        "killPlatform"
+    );
 }
 
 export function addPortal(x, y, colour) {
-    return portals.create(x, y, colour + "Portal");
+    return platforms.portals.create(
+        x,
+        y,
+        colour + "Portal"
+    );
 }

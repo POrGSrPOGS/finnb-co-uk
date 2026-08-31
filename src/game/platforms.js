@@ -29,7 +29,6 @@ export function createPortal({x, y, colour, options}) {
   const portal = addPortal(x, y, colour)
   portal.setDisplaySize(225, 275)
   portal.setData("options", options)
-  console.log(portal.getData("options"))
 
   portal.refreshBody();
 }
