@@ -22,6 +22,7 @@ export default function Spectate({}) {
     transition
     hover:bg-blue-500
     active:scale-95
+    select-none
             "
       onClick={() => {
         togglePlayerCollisions();

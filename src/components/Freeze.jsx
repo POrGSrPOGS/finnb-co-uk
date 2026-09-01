@@ -19,6 +19,7 @@ export default function Freeze({}) {
     transition
     hover:bg-blue-100
     active:scale-95
+    select-none
   "
       onClick={() => {
         toggleMoves();

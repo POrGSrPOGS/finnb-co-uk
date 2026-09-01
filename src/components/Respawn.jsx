@@ -16,6 +16,7 @@ export default function Respawn({}) {
   transition
   hover:bg-red-500
   active:scale-95
+  select-none
 "
       onClick={() => {respawn(true)}}
     >
