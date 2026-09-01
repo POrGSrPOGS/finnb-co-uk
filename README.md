@@ -1,6 +1,6 @@
 # Title: My personal portfolio within a 2d platformer
 
-## Description: I created a unique portfolio by implimenting facts about myself, past work and contact information into a 2d platformer game.
+## Description: I created a unique portfolio by implementing facts about myself, past work and contact information into a 2d platformer game.
 
 # ![alt text](/ingameScreenshot.png)
 
